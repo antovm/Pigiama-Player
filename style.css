@@ -1,0 +1,247 @@
+/* 🌍 Impostazioni base */
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	font-family: Arial, sans-serif;
+	background-color: #000;
+	color: #fff;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+/* 📦 Wrapper principale */
+#videoWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+/* 🔘 Pulsanti visualizzazione */
+#viewButtons {
+	position: absolute;
+	top: 1vh;
+	right: 1vw;
+	z-index: 1000;
+	display: inline-flex;
+	flex-direction: column;
+	gap: 0.5vh;
+}
+.viewBtn {
+	background: #222;
+	border: none;
+	border-radius: 0.4vh;
+	padding: 0.4vh;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 3.2vh;
+	height: 3.2vh;
+}
+.viewBtn:hover { background: #444; }
+
+/* 🎥 Contenitore video */
+.video-container {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1vw;
+	padding: 1vh;
+	position: relative;
+}
+.video-container video {
+	background-color: #000;
+	object-fit: contain;
+	transition: all 0.3s ease;
+}
+
+/* Modalità affiancati */
+.view-side-by-side video {
+	max-width: 48%;
+	max-height: 80vh;
+}
+
+/* Modalità solo video1 */
+.view-only-v1 #video1 { max-width: 100%; max-height: 80vh; }
+.view-only-v1 #video2 { display: none; }
+
+/* Modalità solo video2 */
+.view-only-v2 #video2 { max-width: 100%; max-height: 80vh; }
+.view-only-v2 #video1 { display: none; }
+
+/* Overlay: video1 grande */
+.view-overlay-v1 #video1 { max-width: 100%; max-height: 80vh; }
+.view-overlay-v1 #video2 {
+	position: absolute;
+	bottom: 1vh;
+	right: 1vw;
+	width: 20%;
+	border: 0.2vh solid #fff;
+	box-shadow: 0 0 1vh rgba(0,0,0,0.5);
+}
+
+/* Overlay: video2 grande */
+.view-overlay-v2 #video2 { max-width: 100%; max-height: 80vh; }
+.view-overlay-v2 #video1 {
+	position: absolute;
+	bottom: 1vh;
+	right: 1vw;
+	width: 20%;
+	border: 0.2vh solid #fff;
+	box-shadow: 0 0 1vh rgba(0,0,0,0.5);
+}
+
+/* 🎛️ Barra comandi */
+.control-bar {
+	width: 100%;
+	background: rgba(20,20,20,0.95);
+	display: flex;
+	flex-direction: column;
+}
+.seek-container { width: 100%; padding: 0.5vh 1vw; }
+#seekBar { width: 100%; height: 0.8vh; }
+
+.button-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5vh 1vw;
+}
+.left-controls, .right-controls {
+	display: flex;
+	align-items: center;
+	gap: 0.6vw;
+}
+#timeDisplay {
+	font-size: 1.3vh;
+	color: #ccc;
+	margin-left: 0.5vw;
+}
+
+/* 🔘 Pulsanti generici */
+button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.3vw;
+	padding: 0.4vh 0.6vw;
+	min-width: 3vh;
+	height: 3vh;
+	font-size: 1.3vh;
+	cursor: pointer;
+	background-color: #222;
+	color: #fff;
+	border: none;
+	border-radius: 0.4vh;
+	transition: background 0.2s;
+}
+button:hover { background-color: #444; }
+.material-icons { font-size: 2vh; color: #fff; }
+
+/* 🔊 Volume */
+.volume-control { position: relative; display: inline-flex; align-items: center; }
+#volumeSlider {
+	position: absolute;
+	left: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 8vw;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+}
+.volume-control:hover #volumeSlider { opacity: 1; pointer-events: auto; }
+.volume-control:hover ~ #timeDisplay { display: none; }
+
+/* ⚙️ Menu impostazioni */
+#settingsMenu {
+	position: absolute;
+	bottom: 6vh;
+	right: 1vw;
+	display: none;
+	flex-direction: column;
+	gap: 1vh;
+	background: #111;
+	padding: 1.5vh 2vw;
+	border-radius: 0.6vh;
+	font-size: 1.4vh;
+	box-shadow: 0 0 1.5vh rgba(0,0,0,0.6);
+	z-index: 1001;
+	min-width: 20vw;
+	max-height: 40vh;
+	overflow-y: auto;
+}
+#settingsMenu.visible { display: flex; }
+.settings-option {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+	padding: 0.6vh 0.4vw;
+	border-bottom: 1px solid #333;
+}
+.settings-option:hover { background-color: #222; }
+.settings-option .material-icons { font-size: 1.6vh; }
+
+/* 🔽 Sottomenu dinamico */
+#submenuContainer {
+	position: absolute;
+	bottom: 6vh;
+	right: 1vw;
+	background: #111;
+	padding: 1.2vh 1.5vw;
+	border-radius: 0.6vh;
+	font-size: 1.3vh;
+	box-shadow: 0 0 1.5vh rgba(0,0,0,0.6);
+	z-index: 1002;
+	display: none;
+	flex-direction: column;
+	gap: 0.6vh;
+	min-width: 18vw;
+}
+.submenu-title {
+	display: flex;
+	align-items: center;
+	gap: 0.5vw;
+	margin-bottom: 0.5vh;
+}
+.submenu-title .material-icons { font-size: 1.6vh; cursor: pointer; }
+.submenu-option {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+	padding: 0.4vh 0.4vw;
+}
+.submenu-option:hover { background-color: #222; }
+.submenu-option .check { font-size: 1.5vh; color: #0f0; }
+
+/* 🎛️ Sottotitoli */
+#subtitleBox {
+	position: absolute;
+	bottom: 10vh;
+	width: 100%;
+	text-align: center;
+	font-size: 4vh;
+	color: #fff;
+	background: rgba(0,0,0,0.6);
+	padding: 1vh;
+	font-family: sans-serif;
+	z-index: 10;
+	pointer-events: none;
+}
+
+/* CC disabilitato */
+#ccBtnDisabled {
+	filter: invert(1);
+	display: none;
+}
+#ccBtnDisabled:hover {
+	filter: invert(1) brightness(2); 
+}

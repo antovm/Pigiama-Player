@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="it">
+	<head>
+		<meta charset="UTF-8">
+		<title>Pigiama Player</title>
+		<!-- Icone Material -->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!-- Fogli di stile -->
+		<link rel="stylesheet" href="chapters.css">
+		<link rel="stylesheet" href="style.css">
+		<!-- Loader video -->
+		<script src="video-loader.js"></script>
+	</head>
+	<body>
+		<div id="videoWrapper">
+			
+			<!-- 🔘 Pulsanti visualizzazione -->
+			<div id="viewButtons">
+				<button id="btn0" class="viewBtn" title="Riquadro">
+					<svg viewBox="0 0 24 24" role="presentation" style="width: 24px; height: 24px;">
+						<path d="M23 19V4.98C23 3.88 22.1 3 21 3H3c-1.1 0-2 .88-2 1.98V19c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2m-2 .02H3V4.97h18zM11 8H5v8h6zm8 0h-6v8h6z" style="fill: currentcolor;">
+						</path>
+					</svg> 
+				</button>
+				<button id="btn1" class="viewBtn" title="Solo secondario">
+					<svg viewBox="0 0 24 24" role="presentation" style="width: 24px; height: 24px;">
+						<path d="M23 19V4.98C23 3.88 22.1 3 21 3H3c-1.1 0-2 .88-2 1.98V19c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2m-2 .02H3V4.97h18zM12 12a2.666 2.666 0 1 0 0-5.333A2.666 2.666 0 1 0 12 12m0 1.333c-1.78 0-5.333.894-5.333 2.667v1.333h10.666V16c0-1.773-3.553-2.667-5.333-2.667" style="fill: currentcolor;">
+						</path>
+					</svg>
+				</button>
+				<button id="btn2" class="viewBtn" title="Overlay">
+					<svg viewBox="0 0 24 24" role="presentation" style="width: 24px; height: 24px;">
+						<path d="M23 19V4.98C23 3.88 22.1 3 21 3H3c-1.1 0-2 .88-2 1.98V19c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2m-2 .02H3V4.97h18zM12.147 6.5a2.667 2.667 0 0 1 .5 5.287l-3.12-3.12a2.67 2.67 0 0 1 2.62-2.167m5.333 11.813-.847.854-2-2h-7.82v-1.334c0-1.226 1.667-2.26 3.914-2.573L6 8.533l.847-.846zm0-2.48v.787l-3.24-3.24c1.907.407 3.24 1.353 3.24 2.453" style="fill: currentcolor;">
+						</path>
+					</svg>
+				</button>
+				<button id="btn3" class="viewBtn" title="Immagine nell’immagine">
+					<svg viewBox="0 0 24 24" role="presentation" style="width: 24px; height: 24px;">
+						<path d="M19 11h-8v6h8zm4 8V4.98C23 3.88 22.1 3 21 3H3c-1.1 0-2 .88-2 1.98V19c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2m-2 .02H3V4.97h18z" style="fill: currentcolor;">
+						</path>
+					</svg>
+				</button>
+				<button id="btnExtra1" class="viewBtn" title="Overlay V2">
+					<svg viewBox="0 0 24 24" role="presentation" style="width: 24px; height: 24px;">
+						<path d="M13 12 9 8h4V6H6v7h2V9l4 4v3H4V4h12v8zM2 2v16h10v4h10V12h-4V2z" style="fill: currentcolor;">
+						</path>
+					</svg>
+				</button>
+				<button id="btnExtra2" class="viewBtn " title="Overlay V1">
+					<svg viewBox="0 0 24 24" role="presentation" style="width: 24px; height: 24px;">
+						<path d="M2 2v16h10v4h10V12h-4V2zm4 4h7v2H9l4 4h-1v1L8 9v4H6zm8 8h6v6h-6z" style="fill: currentcolor;">
+						</path>
+					</svg>
+				</button>
+			</div>
+			
+			<!-- 🎥 Contenitore video -->
+			<div id="videocontainer" class="video-container">
+				<!-- I <video> vengono inseriti da video-loader.js -->
+				
+				<!-- Overlay capitoli sopra al video -->
+				
+			</div>
+			
+			<!-- 🎛️ Barra comandi -->
+			<div class="control-bar">
+				<div class="seek-container">
+					<input type="range" id="seekBar" min="0" max="100" value="0">
+				</div>
+				<div class="button-row">
+					<div class="left-controls">
+						<button id="playBtn"><span class="material-icons">play_arrow</span></button>
+						<button id="rewindBtn" title="Indietro 10s">
+							<span class="material-icons">replay_10</span>
+						</button>
+						<button id="forwardBtn" title="Avanti 10s">
+							<span class="material-icons">forward_10</span>
+						</button>
+						
+						<div class="volume-control">
+							<button id="muteBtn"><span class="material-icons">volume_up</span></button>
+							<input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+						</div>
+						<span id="timeDisplay">00:00 / 00:00</span>
+					</div>
+					<div class="right-controls">
+						<button id="ccBtn"><span class="material-icons">closed_caption</span></button>
+						<button id="ccBtnDisabled"><span class="material-icons">closed_caption</span></button>
+						<!-- 🔘 Pulsante Impostazioni -->
+						<button id="settingsBtn"><span class="material-icons">settings</span></button>
+						<!-- 🔘 Pulsante Fullscreen -->
+						<button id="fullscreenBtn"><span class="material-icons">fullscreen</span></button>
+					</div>
+				</div>
+				<!-- Barra capitoli sotto la control-bar -->
+				<div class="chapter-bar">
+					<div id="chaptersBtn" class="hit-target" role="button" tabindex="0" aria-label="Capitoli" aria-haspopup="true" aria-controls="chaptersMenu">
+						<div class="arrow material-icons">keyboard_arrow_up</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- ⚙️ Menu impostazioni -->
+			<div id="settingsMenu"></div>
+			<div id="submenuContainer"></div>
+			
+			<!-- 🎛️ Box sottotitoli -->
+			<div id="subtitleBox"></div>
+			
+		</div>
+		
+		<!-- JS: ordine corretto -->
+		<script src="chapters.js"></script>
+		<script src="subtitle-loader.js"></script>
+		<script src="player-core.js"></script>
+		<script src="player-extra.js"></script>
+	</body>
+</html>

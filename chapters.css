@@ -1,0 +1,165 @@
+/* === Menu capitoli (overlay) === */
+#chaptersMenu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* lascia spazio per control-bar + chapter-bar: regola se diverso nel tuo layout */
+  bottom: 6vh;
+  display: none;            /* default chiuso */
+  z-index: 4000;            /* sopra ai video e alle barre */
+  background: rgba(0, 0, 0, 0.85);
+  padding: 2vh 2vw;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#chaptersMenu.visible {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Lista capitoli */
+#chapterList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 85%;
+  max-height: 100%;
+  overflow-y: auto;
+  background: rgba(20, 20, 20, 0.92);
+  border-radius: 0.6vh;
+}
+
+/* Elemento capitolo */
+.chapter-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1vw;
+  padding: 1.2vh 1.5vw;
+  cursor: pointer;
+  font-size: 2.2vh;
+  color: #fff;
+  border-bottom: 1px solid #444;
+  transition: background 0.2s ease;
+}
+
+.chapter-item:hover {
+  background: #333;
+}
+
+/* Timestamp */
+.chapter-time {
+  color: #aaa;
+  font-family: monospace;
+  font-size: 1.8vh;
+}
+
+/* === Barra capitoli === */
+.chapter-bar {
+  position: relative;        /* crea un contesto locale per eventuali effetti */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1vh;             /* leggermente più grande */
+  background: rgba(20, 20, 20, 0.95);
+  border-top: 1px solid #333;
+  transition: background 0.3s ease;
+  z-index: 1100;             /* sotto al menu capitoli, sopra ai video */
+}
+
+.chapter-bar.open {
+  background: #000;          /* barra nera quando aperto */
+}
+
+/* === Pulsante capitoli (isolato) === */
+#chaptersBtn {
+  position: relative;
+  background: rgba(40, 40, 40, 0.9);
+  border: none;
+  cursor: pointer;
+  padding: 0.4vh 1.5vw;      /* pulsante più compatto */
+  border-radius: 100vh;       /* tondeggiante/pill */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+  box-shadow: 0 -0.3vh 0.6vh rgba(0, 0, 0, 0.4);
+  height: 4vh;
+  min-width: 4vw;
+  overflow: hidden;
+  margin-bottom:0.5vh;
+}
+
+#chaptersBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#chaptersBtn.open {
+  background: #000;          /* pulsante nero quando aperto */
+}
+
+/* Icona freccia: sempre bianca */
+#chaptersBtn .arrow {
+  color: #fff;
+  font-size: 2.2vh;
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+
+#chaptersBtn.open .arrow {
+  transform: rotate(180deg); /* freccia giù quando aperto */
+}
+
+/* Effetti decorativi — SCOPATI SOLO AL PULSANTE per non sporcare altri overlay */
+#chaptersBtn .gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(0,0,0,0.2));
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+#chaptersBtn .gleam {
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  transform: skewX(-20deg);
+  animation: chaptersGleam 3s infinite;
+  pointer-events: none;
+}
+
+@keyframes chaptersGleam {
+  0%   { left: -50%; }
+  100% { left: 100%; }
+}
+
+#chaptersBtn .bubble-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+#chaptersBtn .bubble {
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  width: 40%;
+  height: 40%;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+  animation: chaptersBubble 6s infinite ease-in-out;
+}
+
+@keyframes chaptersBubble {
+  0%   { transform: translate(-50%, 100%) scale(0.5); opacity: 0; }
+  50%  { transform: translate(-50%, 0)     scale(1.0); opacity: 0.4; }
+  100% { transform: translate(-50%, -120%) scale(0.8); opacity: 0; }
+}
